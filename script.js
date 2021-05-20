@@ -22,6 +22,35 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
+function displayForcast(){
+
+  let forecastElement = doucment.querySelector("#forecast");
+
+  forecastElement.innerHTML =`
+  <div class="row">
+            </div>
+          </br>
+            <div class="col-2">
+              <div class="weather-forcast-date">
+              Friday
+              </div>
+              <img
+                src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"
+                alt=""
+                width="42"
+              />
+              <div class="weather-forcast-temperatures">
+                <span class="weather-forecast-temperature-max">
+                  18°
+                </span>
+              <span class="weather-forecast-temperature-min">
+                12°
+              </span>
+              </div>
+              </div>
+              </div>
+                `;
+}
 function displayTemperature(response) {
   let temperatureElement = document.querySelector("#temperature");
   let cityElement = document.querySelector("#city");
@@ -31,6 +60,7 @@ function displayTemperature(response) {
   let dateElement = document.querySelector("#date");
   let iconElement = document.querySelector("#icon");
 
+  displayForcast();
   celsiusTemperature = response.data.main.temp;
 
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
