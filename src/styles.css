@@ -57,3 +57,13 @@ small {
 .search-form {
   margin-bottom: 20px;
 }
+
+.weather-forcast {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.weather-forcast-date {
+  font-size: 16px;
+  color: #000;
+}
