@@ -48,7 +48,7 @@ function displayForcast(){
               </span>
               </div>
               </div>
-              </div>
+              
                 `;
 }
 function displayTemperature(response) {
