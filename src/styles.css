@@ -67,3 +67,6 @@ small {
   font-size: 16px;
   color: #000;
 }
+.weather-forcast-temperatures {
+  font-size: 13px;
+}
