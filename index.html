@@ -3,99 +3,128 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
       crossorigin="anonymous"
     />
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/5ebd6470ec.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="src/styles.css" />
-    <title>Weather App</title>
+    <title>Weather-App-project</title>
   </head>
-
   <body>
     <div class="container">
-      <div class="weather-app">
-        <form class="search-form" id="search-form">
-          <div class="row">
-            <div class="col-9">
-              <input
-                type="search"
-                placeholder="Type a city.."
-                autofocus="on"
-                autocomplete="off"
-                id="city-input"
-                class="form-control shadow-sm"
-              />
-            </div>
-            <div class="col-3">
-              <input
-                type="submit"
-                value="Search"
-                class="form-control btn btn-primary shadow-sm"
-              />
-            </div>
-          </div>
-        </form>
-        <h1 id="city">North Lauderdale, FL</h1>
-        <ul>
-          <li id="date"></li>
-          <li>Partly Cloudy</li>
-        </ul>
-        <div class="row">
-          <div class="col-6">
-            <div class="clearfix">
-              <img
-                src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"
-                alt="Cloudy icon"
-                class="weather-icon float-left"
-              />
-              <div class="float-left">
-                <span class="temperature" id="temperature">79</span
-                ><span class="units">
-                  <a href="#" id="celsius-link">°C</a> |
-                  <a href="#" id="fahrenheit-link">°F</a>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="col-6">
-            <ul>
-              <li>Precipitation: 0%</li>
-              <li>Humidity: 77%</li>
-              <li>Wind: 12 km/h</li>
-            </ul>
-          </div>
-        </div>
-        <div class="weather-forcast">
-          <div class="row">
-            </div>
-          </br>
-            <div class="col-2">
-              <div class="weather-forcast-date">
-              Thu
-              </div>
-              <img
-                src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"
-                alt=""
-                width="42"
-              />
-              <div class="weather-forcast-temperatures">
-                <span class="weather-forecast-temperature-max">
-                  18°
-                </span>
-              <span class="weather-forecast-temperature-min">
-                12°
-              </span>
-                
+      <div class="card">
+        <div class="card-body">
+          <div class="card-header" id="timestamp"></div>
 
+          <section class="loadWeather">
+            <div class="row justify-content-center">
+              <div class="col-auto">
+                <div class="currentWeather">
+                  <img src="" class="mainIcon" id="weather-icon" />
+                  <br />
+                  <span class="city" id="city"></span>
+                </div>
               </div>
+            </div>
+            <div class="row justify-content-around">
+              <div class="col-6">
+                <div class="float-left">
+                  <span class="temperature" id="temperature"></span
+                  ><span class="units" id="units-main"></span>
+                  <br />
+                  <span class="weather-amp" id="weather-amp"></span>
+                </div>
+              </div>
+              <div class="col-auto mr-ml-auto">
+                <span class="dailyweather" id="daily-weather">
+                  <ul>
+                    <li>
+                      <i class="fas fa-thermometer-half"></i> Feels like:
+                      <span id="feels-like"></span>
+                    </li>
+                    <li>
+                      <i class="fas fa-tint"></i> Humidity:
+                      <span id="humidity"></span>%
+                    </li>
+                    <li>
+                      <i class="fas fa-wind"></i> Wind:
+                      <span id="wind-speed"></span>
+                    </li>
+                  </ul>
+                </span>
+              </div>
+            </div>
+          </section>
+
+          <section class="searchForm">
+            <span class="errorMsg" id="error-msg"></span>
+            <form id="search-form">
+              <div class="form-row">
+                <div class="col">
+                  <input
+                    type="text"
+                    placeholder="Change city"
+                    autocomplete="off"
+                    class="form-control form-control-sm"
+                    id="search-city"
+                  />
+                </div>
+                <div class="col-auto">
+                  <div class="btn-group">
+                    <button type="submit" class="btn btn-secondary btn-sm">
+                      <i class="fas fa-search"></i>
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-secondary btn-sm"
+                      id="user-location"
+                    >
+                      <i class="fas fa-map-marker-alt"></i>
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-secondary btn-sm"
+                      id="celsius"
+                    >
+                      <a href="#">°C</a>
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-secondary btn-sm"
+                      id="fahrenheit"
+                    >
+                      <a href="#">°F</a>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </section>
+
+          <section class="forecast">
+            <div class="card-header">Weekly 5 day forecast</div>
+            <div
+              class="row row-cols-1 row-cols-md-6 justify-content-center"
+              id="forecast"
+            ></div>
+          </section>
+        </div>
       </div>
-    </div>
-   
-    <script src="src/index.js"></script>
-   
-  </body>
+      
+       
+          by Ashley Colter
+        
+<script src="src/script.js"></script>
+</body>
 </html>
